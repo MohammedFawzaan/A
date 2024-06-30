@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WanderLust</title>
+</head>
+<body>
+    <h2>Your Listing</h2>
+    <ul>
+        <li> <%= oneListing.title %> </li>
+        <li> <%= oneListing.description %> </li>
+        <li> <%= oneListing.image %> </li>
+        <li> <%= oneListing.price %> </li>
+        <li> <%= oneListing.location %> </li>
+        <li> <%= oneListing.country %> </li>
+    </ul>
+    <br>
+    <a href="/listings/<%= oneListing._id %>/edit">Edit this Listing</a>
+    <form method="post" action="/listings/<%= oneListing._id %>?_method=DELETE">
+        <button>DELETE</button>
+    </form>
+</body>
+</html>

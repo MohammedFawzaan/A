@@ -1,0 +1,145 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    flex: 1;
+}
+
+/* navbar */
+.navbar {
+    height: auto;
+    background-color: white;
+    text-align: center;
+}
+
+.navbar a i {
+    margin-right: 1rem;
+}
+
+.fa-compass {
+    color: #fe424d;
+}
+
+.text {
+    font-weight: 900;
+    font-size: large;
+}
+
+/* footer */
+footer {
+    top: 100%;
+}
+
+.f-info-links {
+    width: 100%;
+}
+
+.f-info-social {
+    width: 100;
+    font-size: 1.5rem;
+    margin-right: 2rem;
+    cursor: pointer;
+}
+
+.f-info-social i {
+    margin: 1rem;
+    margin-top: 0%;
+}
+
+.f-info-links a {
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: #222222;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info {
+    padding: 1rem;
+    text-align: center;
+    height: 8rem;
+    background-color: #dfdbdb;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+}
+
+/* index ejs styling */
+.card {
+    height: 85%;
+    width: 20rem;
+    padding: 0.5rem;
+    margin: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.card:hover {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.card-img-top {
+    height: 75%;
+    width: auto;
+    padding: 0.5rem;
+    object-fit: cover !important;
+}
+
+.heading {
+    margin: 1rem;
+    font-weight: 900;
+    color: #fe424d;
+}
+
+.listinglink {
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.listinglink :hover {
+    text-decoration: none;
+    font-weight: 700;
+}
+.card-img-overlay {
+    opacity: 0;
+}
+
+.card-img-overlay :hover {
+    opacity: 0.8;
+    background-color: white;
+}
+
+/* new ejs styling */
+.form-label {
+    font-size: large;
+    font-weight: 900;
+    text-transform: capitalize;
+}
+
+.btn {
+    margin: 1.2rem;
+    background-color: #dfdbdb;
+}
+
+input {
+    outline: none;
+    padding: 0.8rem;
+}
+
+input::placeholder {
+    font-size: large;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+textarea::placeholder {
+    font-size: large;
+    font-weight: 500;
+    text-transform: capitalize;
+}

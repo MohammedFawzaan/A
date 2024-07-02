@@ -28,6 +28,30 @@ body {
     font-size: large;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+a:hover {
+    text-decoration: none;
+}
+
+.anchor-tag {
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    margin-bottom: 1rem;
+    background-color: #3891f0;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.anchor-tag:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+    color: #fff;
+}
+
 /* footer */
 footer {
     top: 100%;
@@ -60,10 +84,10 @@ footer {
 }
 
 .f-info {
-    padding: 1rem;
+    padding: 1.5rem;
     text-align: center;
     height: 8rem;
-    background-color: #dfdbdb;
+    background-color: #e1e4e7;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -72,16 +96,22 @@ footer {
 
 /* index ejs styling */
 .card {
-    height: 85%;
-    width: 20rem;
-    padding: 0.5rem;
-    margin: 1.5rem;
-    margin-bottom: 1.5rem;
+    height: 100%; /* Adjusted to ensure full height */
+    width: 20rem; /* Maximum width to maintain responsiveness */
+    padding: 1rem; /* Increased padding for better spacing */
+    margin: 1rem; /* Reduced margin for closer alignment */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added shadow for depth */
+    border-radius: 8px; /* Rounded corners for a softer look */
+    transition: box-shadow 0.3s ease; /* Smooth transition for shadow */
+
+    /* Ensuring full responsiveness */
+    @media (max-width: 768px) {
+        max-width: 100%; /* Cards occupy full width on smaller screens */
+    }
 }
 
 .card:hover {
-    cursor: pointer;
-    text-decoration: none;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increased shadow on hover */
 }
 
 .card-img-top {
@@ -92,7 +122,7 @@ footer {
 }
 
 .heading {
-    margin: 1rem;
+    margin: 1.3rem;
     font-weight: 900;
     color: #fe424d;
 }
@@ -115,7 +145,7 @@ footer {
     background-color: white;
 }
 
-/* new ejs styling */
+/* new ejs & edit ejs styling */
 .form-label {
     font-size: large;
     font-weight: 900;
@@ -127,8 +157,13 @@ footer {
     background-color: #dfdbdb;
 }
 
+.btn:hover {
+    background-color: #6e6c6c;
+}
+
 input {
     outline: none;
+    width: 75%;
     padding: 0.8rem;
 }
 
@@ -138,8 +173,38 @@ input::placeholder {
     text-transform: capitalize;
 }
 
+textarea {
+    width: 100%; /* Full width */
+    padding: 10px; /* Padding inside the textarea */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 4px; /* Slightly rounded corners */
+    font-family: inherit; /* Inherit font from the body */
+    font-size: 16px; /* Font size */
+    color: #333; /* Dark gray text color */
+    background-color: #fff; /* White background color */
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    resize: vertical; /* Allow vertical resize only */
+    outline: none; /* Remove outline on focus */
+}
+
 textarea::placeholder {
     font-size: large;
     font-weight: 500;
+    width: 75%;
     text-transform: capitalize;
+}
+
+.img-inp {
+    font-weight: 400;
+}
+
+/* show ejs styling */
+
+.show-img {
+    height: 30vh;
+    width: 75%;
+}
+
+.p-text {
+    font-size: larger;
 }

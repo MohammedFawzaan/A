@@ -1,24 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WanderLust</title>
-</head>
-<body>
-    <h2>Your Listing</h2>
-    <ul>
-        <li> <%= oneListing.title %> </li>
-        <li> <%= oneListing.description %> </li>
-        <li> <%= oneListing.image.url %> </li>
-        <li> <%= oneListing.price %> </li>
-        <li> <%= oneListing.location %> </li>
-        <li> <%= oneListing.country %> </li>
-    </ul>
-    <br>
-    <a href="/listings/<%= oneListing._id %>/edit">Edit this Listing</a>
-    <form method="post" action="/listings/<%= oneListing._id %>?_method=DELETE">
-        <button>DELETE</button>
-    </form>
-</body>
-</html> 
+<% layout("layouts/boilerplate"); %>
+
+    <body>
+        <div class="row">
+            <div class="col-8">
+                <h2 class="heading">Your Listing</h2>
+            </div>
+            <div class="card col-lg-6 offset-lg-2 offset-sm-1">
+                <img src="<%= oneListing.image.url %>" class="card-img-top show-img" alt="Image">
+                <div class="card-body">
+                    <p class="card-text p-text">
+                      <b> <%= oneListing.title %></b> <br>
+                      <b>Description :</b> <%= oneListing.description %> <br>
+                      <b>Price</b> <%= oneListing.price %> <b>/-</b> <br> 
+                      <b>Location</b> <%= oneListing.location %> <br>
+                      <b>Country</b> <%= oneListing.country %>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row offset-2" >
+            <form action=""></form>
+            <a class="btn btn-dard" href="/listings/<%= oneListing._id %>/edit">Edit this Listing</a>
+            <form method="post" action="/listings/<%= oneListing._id %>?_method=DELETE">
+                <button class="btn btn-dark">DELETE</button>
+            </form>
+        </div>
+            
+    </body>

@@ -1,20 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+<% layout("layouts/boilerplate"); %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WanderLust</title>
-</head>
-
-<body>
-    <form method="post" action="/listings/<%= oneListing._id %>?_method=PUT">
-        <input type="text" name="listing[title]" value=" <%= oneListing.title %>" > <br>
-        <textarea name="listing[description]"id=""><%= oneListing.description %></textarea> <br>
-        <input type="text" name="listing[price]" value=" <%= oneListing.price %>" ><br>
-        <input type="text" name="listing[location]" value=" <%= oneListing.location %>"> <br>
-        <input type="text" name="listing[country]" value=" <%= oneListing.country %>"> <br>
-        <button>submit</button>
-    </form>
-</body>
-</html>
+    <body>
+        <div class="row">
+            <div class="col-8 offset-2">
+                <h2 class="heading">Edit Your listings</h2>
+                <form method="post" action="/listings/<%= oneListing._id %>?_method=PUT">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label> <br>
+                        <input type="text" name="listing[title]" value=" <%= oneListing.title %>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Image Link</label> <br>
+                        <input class="img-inp" name="listing[image.url]" value="<%= oneListing.image.url %>" type="url" class="form-label">
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label> <br>
+                        <textarea rows="3" cols="30" name="listing[description]" id=""><%= oneListing.description %></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Price</label> <br>
+                        <input type="text" name="listing[price]" value=" <%= oneListing.price %>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Location</label> <br>
+                        <input type="text" name="listing[location]" value=" <%= oneListing.location %>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="country" class="form-label">Country</label> <br>
+                        <input type="text" name="listing[country]" value=" <%= oneListing.country %>">
+                    </div>
+        
+                    <button class="btn btn-d">Edit</button>
+                </form>
+            </div>
+        </div>        
+    </body>

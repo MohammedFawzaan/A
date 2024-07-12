@@ -3,13 +3,12 @@
     <body>
         <div class="row">
             <div class="col-8">
-                <h2 class="heading">Your Listing</h2>
+                <h2 class="heading"><b> <%= oneListing.title %></b></h2>
             </div>
             <div class="card col-lg-6 offset-lg-2 offset-sm-1">
                 <img src="<%= oneListing.image.url %>" class="card-img-top show-img" alt="Image">
                 <div class="card-body">
                     <p class="card-text p-text">
-                      <b> <%= oneListing.title %></b> <br>
                       <b>Description :</b> <%= oneListing.description %> <br>
                       <b>Price</b> <%= oneListing.price %> <b>/-</b> <br> 
                       <b>Location</b> <%= oneListing.location %> <br>
@@ -25,5 +24,34 @@
                 <button class="btn btn-dark">DELETE</button>
             </form>
         </div>
-            
+        <div class="col-8 offset-3 mb-3">
+            <h4>Leave a Review</h4>
+            <form method="post" action="/listings/<%= oneListing._id %>/reviews">
+                <div class="mb-3 mt-3" >
+                    <label class="form-label" for="rating">Rating</label>
+                    <input  type="range" min="1" max="5" id="rating" name="review[rating]" class="form-range">
+                </div>
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="comment">comment</label>
+                    <textarea required class="form-control" name="review[comment]" id="comment" cols="30" rows="5"></textarea>
+                </div>
+                <button class="btn btn-outline-dark">Submit</button>
+            </form>
+        </div>
+        <hr>
+        <p><b>Reviews</b></p>
+        <div class="row">
+            <% for(let review of oneListing.reviews) { %>
+                <div class="card col-6 ms-3 mb-2">
+                    <div class="card-body">
+                        <h5 class="card-title">John Doe</h5>
+                        <p class="card-text" >Comment : <%= review.comment %></p>
+                        <p class="card-text" >Rating : <%= review.rating %> stars</p>
+                    </div>
+                </div>
+                <form method="post" action="/listings/<%= oneListing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                    <button class="btn btn-sm" >Delete</button>
+                </form>
+            <% } %>
+        </div>
     </body>

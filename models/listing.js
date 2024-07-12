@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Review = require('./review');
 
 const listingSchema = new Schema({
     title : {
@@ -8,17 +9,27 @@ const listingSchema = new Schema({
     },
     description : String,
     image : {
-        // type: String,
-        // default: "https://tse3.mm.bing.net/th?id=OIP.Vt3kGu4X6WQlmH91GpJpzgHaFH&pid=Api&P=0&h=180",
-        // set: (v) => v==="" ? "https://tse3.mm.bing.net/th?id=OIP.Vt3kGu4X6WQlmH91GpJpzgHaFH&pid=Api&P=0&h=180" : v
         filename: { type: String },
         url: { type: String }
     },
     price : Number,
     location : String,
-    country : String
+    country : String,
+    reviews: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Review"
+        }
+    ]
 });
 
 const Listing = mongoose.model('Listing', listingSchema);
+
+// Mongoose middleware to delete related reviews by deleting any listing.
+listingSchema.post('findOneAndDelete', async(listing) => {
+    if(listing) {
+        await Review.deleteMany({_id: {$in : listing.reviews}})
+    }
+});
 
 module.exports = Listing;

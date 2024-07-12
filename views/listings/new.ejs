@@ -6,7 +6,7 @@
             <form method="post" action="/listings">
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label> <br>
-                    <input type="text" name="listing[title]" placeholder="enter title">
+                    <input type="text" name="listing[title]" placeholder="enter title" required>
                 </div>
     
                 <div class="mb-3">
@@ -16,24 +16,23 @@
     
                 <div class="mb-3">
                     <label for="description" class="form-label">description</label> <br>
-                    <textarea rows="3" cols="30" name="listing[description]" placeholder="enter description" id=""></textarea>
+                    <textarea rows="3" cols="30" name="listing[description]" placeholder="enter description" id="" required></textarea>
                 </div>
     
                 <div class="mb-3"><label for="price" class="form-label">price</label> <br>
-                    <input type="number" name="listing[price]" placeholder="enter price">
+                    <input type="number" name="listing[price]" placeholder="enter price" required>
                 </div>
     
                 <div class="mb-3"><label for="country" class="form-label">country</label> <br>
-                    <input type="text"" name="listing[country]" placeholder="enter country">
+                    <input type="text"" name="listing[country]" placeholder="enter country" required>
                 </div>
 
                 <div><label for="location" class="form-label">location</label> <br>
-                    <input type="text" name="listing[location]" placeholder="enter location">
+                    <input type="text" name="listing[location]" placeholder="enter location" required>
                 </div>
     
                 <button class="btn btn-d">ADD</button>
             </form>
             </div>
         </div>
-        
     </body>

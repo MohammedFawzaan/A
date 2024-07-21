@@ -25,7 +25,7 @@
             </form>
         </div>
         <div class="col-8 offset-3 mb-3">
-            <h4>Leave a Review</h4>
+            <h3>Leave a Review</h3>
             <form method="post" action="/listings/<%= oneListing._id %>/reviews">
                 <div class="mb-3 mt-3" >
                     <label class="form-label" for="rating">Rating</label>
@@ -39,8 +39,8 @@
             </form>
         </div>
         <hr>
-        <p><b>Reviews</b></p>
         <div class="row">
+            <h3>Reviews</h3>
             <% for(let review of oneListing.reviews) { %>
                 <div class="card col-6 ms-3 mb-2">
                     <div class="card-body">

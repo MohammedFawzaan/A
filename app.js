@@ -11,13 +11,15 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const flash = require('connect-flash');
 
-
 const passport = require('passport');
 const localStrategy = require('passport-local');
 const User = require('./models/user.js');
 
+const listingRouter = require('./routes/ListingRoute.js');
+const reviewRouter = require('./routes/ReviewsRoute.js');
+const userRouter = require('./routes/UserRoute.js');
+
 const ExpressError = require('./utils/ExpressError.js'); // require ExpressError Class
-const { register } = require('module');
 
 app.engine("ejs", ejsMate); // set ejsMate
 app.set("view engine", "ejs"); // set views engine
@@ -54,39 +56,41 @@ const sessionOptions = session({
 app.use(sessionOptions);
 app.use(flash());
 
-// app.use((req, res, next) => {
-//     req.locals.success = req.flash("success");
-//     next();
-// });
-
-// middleware for routes
-app.use("/listings", require('./routes/ListingRoute.js'));
-app.use("/listings/:id/reviews", require('./routes/ReviewsRoute.js'));
-
 // Authentication Configuration
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
-// app.use(passport.initialize());
-// app.use(passport.session());
-// passport.use(new localStrategy(User.authenticate()));
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
+app.use((req, res, next) => {
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
+    // current user session, because we are using req.user in navbar.ejs template
+    res.locals.currUser = req.user;
+    next();
+});
 
 // DemoUser
-// app.get('/demouser', async (req, res) => {
-//     let fakeUser = new User({
-//         email: "fawzaan@gmail.com",
-//         username: "Fawzaan"
-//     });
-//     // (user, password)
-//     let registeredUser = await User.register(fakeUser, "helloWorld");
-//     res.send(registeredUser);
-// });
+app.get('/demouser', async (req, res) => {
+    let fakeUser = new User({
+        email: "fawzaan@gmail.com",
+        username: "Fawzaan"
+    });
+    // ModelName.register(user, password)
+    let registeredUser = await User.register(fakeUser, "helloWorld");
+    res.send(registeredUser);
+});
+
+// middleware for routes
+app.use("/listings", listingRouter);
+app.use("/listings/:id/reviews", reviewRouter);
+app.use("/", userRouter);
 
 // if client enter some other route. UI shows Page not found.
 app.all("*", (req, res, next) => {
     next(new ExpressError(404, "Page not found!"));
 });
-
 // Error handling middleware
 app.use((err, req, res, next) => {
     const { statusCode = 500, message = 'Something went wrong' } = err;

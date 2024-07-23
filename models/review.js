@@ -1,4 +1,4 @@
-const { default: mongoose } = require("mongoose");
+const { default: mongoose, Schema } = require("mongoose");
 
 const reviewSchema = new  mongoose.Schema({
     comment : {
@@ -12,6 +12,10 @@ const reviewSchema = new  mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now()
+    },
+    author: {
+        type: Schema.Types.ObjectId,
+        refs: "User"
     }
 });
 

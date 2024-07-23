@@ -66,20 +66,9 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
-    // current user session, because we are using req.user in navbar.ejs template
+    // current user session, because we are using req.user in ejs templates and for Authorization.
     res.locals.currUser = req.user;
     next();
-});
-
-// DemoUser
-app.get('/demouser', async (req, res) => {
-    let fakeUser = new User({
-        email: "fawzaan@gmail.com",
-        username: "Fawzaan"
-    });
-    // ModelName.register(user, password)
-    let registeredUser = await User.register(fakeUser, "helloWorld");
-    res.send(registeredUser);
 });
 
 // middleware for routes
@@ -91,6 +80,7 @@ app.use("/", userRouter);
 app.all("*", (req, res, next) => {
     next(new ExpressError(404, "Page not found!"));
 });
+
 // Error handling middleware
 app.use((err, req, res, next) => {
     const { statusCode = 500, message = 'Something went wrong' } = err;

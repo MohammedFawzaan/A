@@ -5,25 +5,27 @@ const router = express.Router({mergeParams: true});
 
 const Listing = require('../models/listing.js'); // require Listing Model
 const Review = require('../models/review.js'); // require Review Model
+const { isLoggedIn, isAuthor } = require('../middleware.js');
 
 // Reviews Route
-router.post('/', asyncHandler(async(req, res) => {
+router.post('/', isLoggedIn, asyncHandler(async(req, res) => {
     let {id} = req.params;
 
     let listing = await Listing.findById(id);
     let newReview = new Review(req.body.review);
+    newReview.author = req.user._id;
 
     listing.reviews.push(newReview);
 
     await newReview.save();
     await listing.save();
 
-    console.log("Review saved");
+    // console.log(newReview);
     res.redirect(`/listings/${listing._id}`);
 }));
 
 // Review Delete Route
-router.delete('/:reviewId', asyncHandler(async(req, res) => {
+router.delete('/:reviewId', isLoggedIn, isAuthor, asyncHandler(async(req, res) => {
     let {id, reviewId} = req.params;
 
     await Listing.findByIdAndUpdate(id, {$pull : {reviews: reviewId}});

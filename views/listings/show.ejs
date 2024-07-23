@@ -1,5 +1,14 @@
 <% layout("layouts/boilerplate"); %>
-
+<% if (success && success.length > 0) { %>
+    <div class="alert alert-success">
+        <%= success %>
+    </div>
+<% } %>
+<% if (error && error.length > 0) { %>
+    <div class="alert alert-danger">
+        <%= error %>
+    </div>
+<% } %>
     <body>
         <div class="row">
             <div class="col-8">
@@ -9,6 +18,7 @@
                 <img src="<%= oneListing.image.url %>" class="card-img-top show-img" alt="Image">
                 <div class="card-body">
                     <p class="card-text p-text">
+                      <p> <%= oneListing.owner.username %> </p> <br>
                       <b>Description :</b> <%= oneListing.description %> <br>
                       <b>Price</b> <%= oneListing.price %> <b>/-</b> <br> 
                       <b>Location</b> <%= oneListing.location %> <br>
@@ -17,6 +27,8 @@
                 </div>
             </div>
         </div>
+        <!-- Protecting edit and delete button -->
+         <% if(currUser && oneListing.owner.equals(currUser._id)) {%>
         <div class="row offset-2" >
             <form action=""></form>
             <a class="btn btn-dard" href="/listings/<%= oneListing._id %>/edit">Edit this Listing</a>
@@ -24,6 +36,10 @@
                 <button class="btn btn-dark">DELETE</button>
             </form>
         </div>
+        <% } %>
+
+        <!-- Reviews -->
+         <% if(currUser) { %>
         <div class="col-8 offset-3 mb-3">
             <h3>Leave a Review</h3>
             <form method="post" action="/listings/<%= oneListing._id %>/reviews">
@@ -38,20 +54,23 @@
                 <button class="btn btn-outline-dark">Submit</button>
             </form>
         </div>
+        <% } %>
         <hr>
         <div class="row">
-            <h3>Reviews</h3>
+            <h3>Reviews</h3> <br>
             <% for(let review of oneListing.reviews) { %>
                 <div class="card col-6 ms-3 mb-2">
                     <div class="card-body">
-                        <h5 class="card-title">John Doe</h5>
-                        <p class="card-text" >Comment : <%= review.comment %></p>
-                        <p class="card-text" >Rating : <%= review.rating %> stars</p>
+                        <h5 class="card-title"> <%= review.author.username %> </h5>
+                        <p class="card-text" ><b>Comment</b> : <%= review.comment %></p>
+                        <p class="card-text" ><b>Rating</b> : <%= review.rating %> stars</p>
                     </div>
                 </div>
-                <form method="post" action="/listings/<%= oneListing._id %>/reviews/<%= review._id %>?_method=DELETE">
-                    <button class="btn btn-sm" >Delete</button>
-                </form>
+                <% if(currUser) { %>
+                    <form method="post" action="/listings/<%= oneListing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                        <button class="btn btn-sm" >Delete</button>
+                    </form>
+                <% } %>
             <% } %>
         </div>
     </body>

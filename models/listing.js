@@ -20,7 +20,11 @@ const listingSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "Review"
         }
-    ]
+    ],
+    owner : {
+        type : Schema.Types.ObjectId,
+        refs: "User"
+    }
 });
 
 const Listing = mongoose.model('Listing', listingSchema);
